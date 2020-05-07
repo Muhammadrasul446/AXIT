@@ -1,2 +1,2 @@
 # AXIT
-AXIT Website Template (not responsive)
+AXIT Website Template. Now responsive.

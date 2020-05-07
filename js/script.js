@@ -1,39 +1,67 @@
-location.href = "index.html#top";
+// JavaScript Document
 
-function changeContent(arg) {
-	let firstTab = document.getElementsByClassName('tab_content')[0];
-	let secondTab = document.getElementsByClassName('tab_content')[1];
-	let thirdTab = document.getElementsByClassName('tab_content')[2];
 
-	let active = arg.toString();
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 1){  
+        $('header').addClass("sticky");
+    }
+    else{
+        $('header').removeClass("sticky");
+    }
+});
 
-	if (active == "0") {
-		firstTab.classList.add('show');
-	} else {
-		firstTab.classList.remove('show');
-	}
-	if (active == "1") {
-		secondTab.classList.add('show');
-	} else {
-		secondTab.classList.remove('show');
-	}
-	if (active == "2") {
-		thirdTab.classList.add('show');
-	} else {
-		thirdTab.classList.remove('show');
-	}
-}
-const anchors = document.querySelectorAll('a[href*="#"]')
+jQuery(document).ready(function() {
+    jQuery('.tabs .tab-links a').on('click', function(e)  {
+        var currentAttrValue = jQuery(this).attr('href');
+ 
+        // Show/Hide Tabs
+        // Show/Hide Tabs
+jQuery('.tabs ' + currentAttrValue).siblings().slideUp(400);
+jQuery('.tabs ' + currentAttrValue).delay(400).slideDown(400);
+ 
+        // Change/remove current tab to active
+        jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+ 
+        e.preventDefault();
+    });
+});
+	
 
-for (let anchor of anchors) {
-	anchor.addEventListener('click', function (e) {
-		e.preventDefault()
+	//animation effect(waypoint)
+//paste this code under head tag or in a seperate js file.
+ // Wait for window load
+$(window).load(function() {
+  // Animate loader off screen
+  $(".se-pre-con").fadeOut("slow");;
+  
 
-		const blockID = anchor.getAttribute('href').substr(1)
+            function onScrollInit( items, trigger ) {
+                items.each( function() {
+                var osElement = $(this),
+                    osAnimationClass = osElement.attr('data-os-animation'),
+                    osAnimationDelay = osElement.attr('data-os-animation-delay');
+                  
+                    osElement.css({
+                        '-webkit-animation-delay':  osAnimationDelay,
+                        '-moz-animation-delay':     osAnimationDelay,
+                        'animation-delay':          osAnimationDelay
+                    });
 
-		document.getElementById(blockID).scrollIntoView({
-			behavior: 'smooth',
-			block: 'start'
-		})
-	})
-}
+                    var osTrigger = ( trigger ) ? trigger : osElement;
+                    
+                    osTrigger.waypoint(function() {
+                        osElement.addClass('animated').addClass(osAnimationClass);
+                        },{
+                            triggerOnce: true,
+                            offset: '90%'
+                    });
+                });
+            }
+
+            onScrollInit( $('.os-animation') );
+            onScrollInit( $('.staggered-animation'), $('.staggered-animation-container') 
+  
+  
+  
+);
+});
